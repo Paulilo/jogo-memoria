@@ -17,7 +17,7 @@ imagem:"img/raizes-cearenses.png"
 
 {
 nome:"TercIA",
-imagem:"img/tercia.png"
+imagem:"img/Tercia.png"
 },
 
 {
