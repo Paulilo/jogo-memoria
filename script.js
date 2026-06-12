@@ -218,7 +218,7 @@ return;
 
 }
 
-somErro.currentTime = 0;
+somErro.currentTime = 1.5;
 somErro.play();
 
 bloqueado = true;
