@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jogo da Memória - Ematerce</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>JOGO DA MEMÓRIA</h1>
+
+        <p class="subtitulo">
+            Encontre os pares dos programas da Ematerce
+        </p>
+
+    </div>
+
+    <div class="painel">
+
+        <div class="indicador">
+            <h3>Jogadas</h3>
+            <span id="jogadas">0</span>
+        </div>
+
+        <div class="indicador">
+            <h3>Tempo</h3>
+            <span id="tempo">00:00</span>
+        </div>
+
+        <div class="indicador">
+            <h3>Pares</h3>
+            <span id="pares">0/9</span>
+        </div>
+
+    </div>
+
+    <div id="game"></div>
+
+    <center>
+        <button onclick="startGame()">
+            Reiniciar Jogo
+        </button>
+    </center>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
