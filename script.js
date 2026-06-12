@@ -1,182 +1,304 @@
-const temas=[
+const programas = [
 
-{nome:"Crédito Rural",imagem:"img/credito-rural.png"},
-{nome:"Fomento Rural",imagem:"img/fomento-rural.png"},
-{nome:"Raízes Cearenses",imagem:"img/raizes-cearenses.png"},
-{nome:"Terc.IA",imagem:"img/tercia.png"},
-{nome:"Assistência Técnica",imagem:"img/ater-ceara.png"},
-{nome:"Turismo Rural",imagem:"img/turismo-rural.png"},
-{nome:"Cotonicultura",imagem:"img/cotonicultura.png"},
-{nome:"+Ater Ceará",imagem:"img/ater-ceara.png"},
-{nome:"Citaf+",imagem:"img/citaf.png"}
+{
+nome:"Crédito Rural",
+imagem:"img/credito-rural.png"
+},
+
+{
+nome:"Fomento Rural",
+imagem:"img/fomento-rural.png"
+},
+
+{
+nome:"Raízes Cearenses",
+imagem:"img/raizes-cearenses.png"
+},
+
+{
+nome:"TercIA",
+imagem:"img/tercia.png"
+},
+
+{
+nome:"Turismo Rural",
+imagem:"img/turismo-rural.png"
+},
+
+{
+nome:"CITAF+",
+imagem:"img/citaf.png"
+},
+
+{
+nome:"+Ater Ceará",
+imagem:"img/ater-ceara.png"
+},
+
+{
+nome:"Cotonicultura",
+imagem:"img/cotonicultura.png"
+}
 
 ];
 
-let cartas=[];
-let primeiraCarta=null;
-let segundaCarta=null;
-let bloqueado=false;
+let cartas = [];
+let primeiraCarta = null;
+let segundaCarta = null;
+let bloqueado = false;
 
-let jogadas=0;
-let pares=0;
+let jogadas = 0;
+let pares = 0;
 
-let segundos=0;
+let segundos = 0;
 let timer;
 
-function embaralhar(a){
-return a.sort(()=>Math.random()-0.5);
+const game = document.getElementById("game");
+
+function embaralhar(array){
+
+return array.sort(() => Math.random() - 0.5);
+
 }
 
-function startGame(){
+function iniciarCronometro(){
 
 clearInterval(timer);
 
-segundos=0;
+segundos = 0;
 
-timer=setInterval(()=>{
+timer = setInterval(() => {
 
 segundos++;
 
-const min=Math.floor(segundos/60);
-const seg=segundos%60;
+const min = Math.floor(segundos / 60);
+const seg = segundos % 60;
 
-document.getElementById("tempo").innerText=
-String(min).padStart(2,"0")+":"+
+document.getElementById("tempo").innerText =
+String(min).padStart(2,"0") +
+":" +
 String(seg).padStart(2,"0");
 
 },1000);
 
-jogadas=0;
-pares=0;
+}
 
-document.getElementById("jogadas").innerText="0";
-document.getElementById("pares").innerText="0/9";
+function atualizarRecorde(){
 
-const game=document.getElementById("game");
+const recorde =
+localStorage.getItem("recordeEmaterce");
 
-game.innerHTML="";
+if(recorde){
 
-cartas=embaralhar([...temas,...temas]);
+document.getElementById("recorde").innerText =
+recorde;
 
-cartas.forEach(tema=>{
+}
 
-const card=document.createElement("div");
+}
 
-card.classList.add("card");
+function criarCartas(){
 
-card.dataset.tema=tema.nome;
+cartas = [];
 
-card.innerHTML=`
+programas.forEach(programa => {
 
-<div class="front">
-EMATERCE
+cartas.push(programa);
+cartas.push({...programa});
+
+});
+
+embaralhar(cartas);
+
+}
+
+function criarTabuleiro(){
+
+game.innerHTML = "";
+
+cartas.forEach(programa => {
+
+const carta = document.createElement("div");
+
+carta.classList.add("memory-card");
+
+carta.dataset.nome = programa.nome;
+
+carta.innerHTML = `
+
+<div class="front-face">
+
+<img src="img/logo-ematerce.png">
+
+<h3>EMATERCE</h3>
+
+<span>JOGO DA MEMÓRIA</span>
+
 </div>
 
-<div class="back">
-<img src="${tema.imagem}" class="logo-programa">
-<div class="titulo-programa">
-${tema.nome}
+<div class="back-face">
+
+<img src="${programa.imagem}"
+alt="${programa.nome}">
+
 </div>
-</div>
+
 `;
 
-card.addEventListener("click",()=>virarCarta(card));
+carta.addEventListener(
+"click",
+() => virarCarta(carta)
+);
 
-game.appendChild(card);
+game.appendChild(carta);
 
 });
 
 }
 
-function virarCarta(card){
+function virarCarta(carta){
 
 if(
 bloqueado ||
-card.classList.contains("flip") ||
-card===primeiraCarta
+carta.classList.contains("flip")
 ) return;
 
-card.classList.add("flip");
+carta.classList.add("flip");
 
 if(!primeiraCarta){
 
-primeiraCarta=card;
+primeiraCarta = carta;
 return;
+
 }
 
-segundaCarta=card;
+segundaCarta = carta;
 
 jogadas++;
 
-document.getElementById("jogadas").innerText=jogadas;
+document.getElementById("jogadas")
+.innerText = jogadas;
 
 verificarPar();
+
 }
 
 function verificarPar(){
 
-const igual=
-primeiraCarta.dataset.tema===
-segundaCarta.dataset.tema;
+const igual =
+primeiraCarta.dataset.nome ===
+segundaCarta.dataset.nome;
 
 if(igual){
 
-primeiraCarta.classList.add("encontrada");
-segundaCarta.classList.add("encontrada");
+primeiraCarta.classList.add("matched");
+segundaCarta.classList.add("matched");
 
 pares++;
 
-document.getElementById("pares").innerText=
-pares+"/9";
+document.getElementById("pares")
+.innerText = pares + " / 8";
 
-primeiraCarta=null;
-segundaCarta=null;
+primeiraCarta = null;
+segundaCarta = null;
 
-if(pares===9){
+if(pares === 8){
 
-clearInterval(timer);
+fimDeJogo();
 
-let recorde=
-localStorage.getItem("recorde");
-
-if(!recorde || jogadas<recorde){
-
-localStorage.setItem(
-"recorde",
-jogadas
-);
-
-document.getElementById("recorde").innerText=
-jogadas;
-}
-
-setTimeout(()=>{
-
-alert(
-"Parabéns! Você concluiu o jogo em "+
-jogadas+
-" jogadas."
-);
-
-},300);
 }
 
 return;
+
 }
 
-bloqueado=true;
+bloqueado = true;
 
-setTimeout(()=>{
+setTimeout(() => {
 
 primeiraCarta.classList.remove("flip");
 segundaCarta.classList.remove("flip");
 
-primeiraCarta=null;
-segundaCarta=null;
+primeiraCarta = null;
+segundaCarta = null;
 
-bloqueado=false;
+bloqueado = false;
 
 },1000);
+
+}
+
+function fimDeJogo(){
+
+clearInterval(timer);
+
+let recorde =
+localStorage.getItem("recordeEmaterce");
+
+if(
+!recorde ||
+jogadas < Number(recorde)
+){
+
+localStorage.setItem(
+"recordeEmaterce",
+jogadas
+);
+
+recorde = jogadas;
+
+}
+
+document.getElementById("resultado-final")
+.innerHTML =
+
+`
+Você concluiu o jogo em <strong>${jogadas}</strong>
+jogadas <br><br>
+
+Tempo: <strong>
+${document.getElementById("tempo").innerText} </strong>
+`;
+
+document.getElementById("modal-vitoria")
+.style.display = "flex";
+
+atualizarRecorde();
+
+}
+
+function fecharModal(){
+
+document.getElementById("modal-vitoria")
+.style.display = "none";
+
+startGame();
+
+}
+
+function startGame(){
+
+primeiraCarta = null;
+segundaCarta = null;
+bloqueado = false;
+
+jogadas = 0;
+pares = 0;
+
+document.getElementById("jogadas")
+.innerText = "0";
+
+document.getElementById("pares")
+.innerText = "0 / 8";
+
+criarCartas();
+
+criarTabuleiro();
+
+iniciarCronometro();
+
+atualizarRecorde();
+
 }
 
 startGame();
