@@ -3,67 +3,111 @@
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória - Ematerce</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Jogo da Memória - Ematerce</title>
-
+```
 <link rel="stylesheet" href="style.css">
+```
 
 </head>
 
 <body>
 
-<div class="container">
-
 ```
-<header class="header">
+<div class="page-bg">
 
-    <h1>JOGO DA MEMÓRIA</h1>
+    <header class="hero">
 
-    <p>
-        Encontre os pares dos programas e ações da Ematerce
-    </p>
+        <div class="hero-left">
 
-</header>
+            <img src="img/logo-ematerce.png"
+                 alt="Ematerce"
+                 class="logo-ematerce">
 
-<section class="painel">
+            <div class="hero-brand">
+                <h2>EMATERCE</h2>
+                <p>JOGO DA MEMÓRIA</p>
+            </div>
 
-    <div class="info">
-        <span>Jogadas</span>
-        <strong id="jogadas">0</strong>
-    </div>
+        </div>
 
-    <div class="info">
-        <span>Tempo</span>
-        <strong id="tempo">00:00</strong>
-    </div>
+        <div class="hero-right">
 
-    <div class="info">
-        <span>Pares</span>
-        <strong id="pares">0/9</strong>
-    </div>
+            <h1>JOGO DA<br>MEMÓRIA</h1>
 
-    <div class="info">
-        <span>Recorde</span>
-        <strong id="recorde">--</strong>
-    </div>
+            <p>
+                Encontre os pares dos programas e ações da Ematerce.
+            </p>
 
-</section>
+        </div>
 
-<main id="game"></main>
+    </header>
 
-<div class="acoes">
-    <button onclick="startGame()">
-        Reiniciar Jogo
-    </button>
+    <section class="dashboard">
+
+        <div class="card-info">
+            <span>Jogadas</span>
+            <strong id="jogadas">0</strong>
+        </div>
+
+        <div class="card-info">
+            <span>Tempo</span>
+            <strong id="tempo">00:00</strong>
+        </div>
+
+        <div class="card-info">
+            <span>Melhor Resultado</span>
+            <strong id="recorde">--</strong>
+        </div>
+
+        <div class="card-info">
+            <span>Pares</span>
+            <strong id="pares">0 / 8</strong>
+        </div>
+
+    </section>
+
+    <main id="game"></main>
+
+    <section class="actions">
+
+        <button onclick="startGame()">
+            Reiniciar Jogo
+        </button>
+
+    </section>
+
+    <footer>
+
+        <span>
+            Desenvolvido para capacitação institucional Ematerce
+        </span>
+
+    </footer>
+
 </div>
-```
+
+<div id="modal-vitoria" class="modal">
+
+    <div class="modal-content">
+
+        <h2>🏆 Parabéns!</h2>
+
+        <p id="resultado-final"></p>
+
+        <button onclick="fecharModal()">
+            Jogar Novamente
+        </button>
+
+    </div>
 
 </div>
 
 <script src="script.js"></script>
+```
 
 </body>
+
 </html>
