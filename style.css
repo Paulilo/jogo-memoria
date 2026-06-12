@@ -497,3 +497,29 @@ font-size:2.5rem;
 
 color:#2E7D32;
 }
+.matched{
+
+animation:
+pulse .7s,
+glow 1s;
+
+box-shadow:
+0 0 15px #43A047,
+0 0 30px #8BC34A,
+0 0 45px #8BC34A;
+}
+
+@keyframes glow{
+
+0%{
+filter:brightness(1);
+}
+
+50%{
+filter:brightness(1.3);
+}
+
+100%{
+filter:brightness(1);
+}
+}

@@ -40,7 +40,11 @@ nome:"Cotonicultura",
 imagem:"img/cotonicultura.png"
 }
 
+
 ];
+const somAcerto = new Audio("sons/acerto.mp3");
+const somErro = new Audio("sons/erro.mp3");
+const somVitoria = new Audio("sons/vitoria.mp3");
 
 let cartas = [];
 let primeiraCarta = null;
@@ -190,7 +194,9 @@ primeiraCarta.dataset.nome ===
 segundaCarta.dataset.nome;
 
 if(igual){
-
+    
+somAcerto.currentTime = 0;
+somAcerto.play();
 primeiraCarta.classList.add("matched");
 segundaCarta.classList.add("matched");
 
@@ -212,6 +218,9 @@ return;
 
 }
 
+somErro.currentTime = 0;
+somErro.play();
+
 bloqueado = true;
 
 setTimeout(() => {
@@ -231,6 +240,9 @@ bloqueado = false;
 function fimDeJogo(){
 
 clearInterval(timer);
+
+somVitoria.currentTime = 0;
+somVitoria.play();
 
 let recorde =
 localStorage.getItem("recordeEmaterce");
@@ -302,3 +314,10 @@ atualizarRecorde();
 }
 
 startGame();
+document.addEventListener("click",()=>{
+
+somAcerto.load();
+somErro.load();
+somVitoria.load();
+
+},{once:true});
