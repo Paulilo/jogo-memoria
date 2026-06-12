@@ -42,8 +42,8 @@ imagem:"img/cotonicultura.png"
 
 
 ];
-const somAcerto = new Audio("sons/acerto.mp3");
-const somErro = new Audio("sons/erro.mp3");
+const somAcerto = new Audio("sons/faustao-acerto.mp3");
+const somErro = new Audio("sons/faustao-erro.mp3");
 const somVitoria = new Audio("sons/vitoria.mp3");
 
 let cartas = [];
