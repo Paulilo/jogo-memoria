@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Jogo da Memória - Ematerce</title>
@@ -16,42 +17,49 @@
 
 <div class="container">
 
-    <div class="header">
+```
+<header class="header">
 
-        <h1>JOGO DA MEMÓRIA</h1>
+    <h1>JOGO DA MEMÓRIA</h1>
 
-        <p class="subtitulo">
-            Encontre os pares dos programas da Ematerce
-        </p>
+    <p>
+        Encontre os pares dos programas e ações da Ematerce
+    </p>
 
+</header>
+
+<section class="painel">
+
+    <div class="info">
+        <span>Jogadas</span>
+        <strong id="jogadas">0</strong>
     </div>
 
-    <div class="painel">
-
-        <div class="indicador">
-            <h3>Jogadas</h3>
-            <span id="jogadas">0</span>
-        </div>
-
-        <div class="indicador">
-            <h3>Tempo</h3>
-            <span id="tempo">00:00</span>
-        </div>
-
-        <div class="indicador">
-            <h3>Pares</h3>
-            <span id="pares">0/9</span>
-        </div>
-
+    <div class="info">
+        <span>Tempo</span>
+        <strong id="tempo">00:00</strong>
     </div>
 
-    <div id="game"></div>
+    <div class="info">
+        <span>Pares</span>
+        <strong id="pares">0/9</strong>
+    </div>
 
-    <center>
-        <button onclick="startGame()">
-            Reiniciar Jogo
-        </button>
-    </center>
+    <div class="info">
+        <span>Recorde</span>
+        <strong id="recorde">--</strong>
+    </div>
+
+</section>
+
+<main id="game"></main>
+
+<div class="acoes">
+    <button onclick="startGame()">
+        Reiniciar Jogo
+    </button>
+</div>
+```
 
 </div>
 
